@@ -8,6 +8,7 @@ var cors = require("cors");
 const { dbConnection } = require("./databaseConnection");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const errorHandler = require("./middleware/error");
 
 // db connection
 dbConnection();
@@ -16,8 +17,11 @@ dbConnection();
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(bodyParser.urlencoded({ limit: "5mb", extended: true }));
-app.use(cookieParser())
-app.use(cors())
+app.use(cookieParser());
+app.use(cors());
+
+// error middleware
+app.use(errorHandler);
 
 // port
 const port = process.env.PORT || 8000;

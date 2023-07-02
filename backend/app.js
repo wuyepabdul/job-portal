@@ -22,10 +22,10 @@ app.use(cookieParser());
 app.use(cors());
 
 // Routes
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Welcome to Job Portal API");
 });
-app.use("/auth", authRoutes);
+app.use("/api/auth", authRoutes);
 
 // error middleware
 app.use(errorHandler);

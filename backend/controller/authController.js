@@ -40,6 +40,7 @@ exports.signinController = async (req, res) => {
 
     sendTokenResponse(user, 200, res);
   } catch (error) {
+    console.log("signin error", error.message);
     return res
       .status(500)
       .json({ error: true, message: `Server error => ${error.message}` });

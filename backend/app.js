@@ -8,7 +8,7 @@ var cors = require("cors");
 const { dbConnection } = require("./databaseConnection");
 const cookieParser = require("cookie-parser");
 const errorHandler = require("./middleware/error");
-
+const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 // db connection
@@ -25,7 +25,8 @@ app.use(cors());
 app.get("/api", (req, res) => {
   res.send("Welcome to Job Portal API");
 });
-app.use("/api/auth", authRoutes);
+app.use("/api", authRoutes);
+app.use("/api", userRoutes);
 
 // error middleware
 app.use(errorHandler);

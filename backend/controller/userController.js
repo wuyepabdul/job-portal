@@ -57,7 +57,7 @@ exports.deleteUserController = async (req, res) => {
   try {
     const user = await User.findByIdAndRemove(req.params.id);
     return res
-      .status(201)
+      .status(200)
       .json({ success: true, user, message: "User Deleted Successfully" });
   } catch (error) {
     console.log("Delete user error", error.message);

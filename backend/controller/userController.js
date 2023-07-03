@@ -27,7 +27,7 @@ exports.allUsersController = async (req, res) => {
 
 exports.singleUserController = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).select("-password");
     if (user) {
       return res.status(200).json({ success: true, user });
     } else {
@@ -35,6 +35,20 @@ exports.singleUserController = async (req, res) => {
     }
   } catch (error) {
     console.log("single user error", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};
+
+exports.editUserController = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    return res
+      .status(201)
+      .json({ success: true, user, message: "User Updated Successfully" });
+  } catch (error) {
+    console.log("edit user error", error.message);
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };

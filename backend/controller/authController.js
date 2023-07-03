@@ -67,3 +67,13 @@ exports.logoutController = (req, res, next) => {
   res.clearCookie("token");
   res.status(200).json({ success: true, message: "logged out" });
 };
+
+exports.userProfileController = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    console.log("user profile error =>", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};

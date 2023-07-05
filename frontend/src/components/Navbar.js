@@ -12,13 +12,11 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { useTheme } from "@mui/material";
 
 const pages = ["Home", "Pages"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function Navbar() {
-    const {palette} = useTheme()
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

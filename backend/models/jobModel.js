@@ -22,6 +22,7 @@ const jobSchema = new mongoose.Schema(
       type: String,
     },
     available: { type: Boolean, default: true },
+    jobType: { type: ObjectId, ref: "JobType",required:true },
     user: { type: ObjectId, ref: "User",required:true },
   },
   { timestamps: true }

@@ -1,6 +1,6 @@
 const JobTypeModel = require("../models/jobTypeModel");
 
-exports.createJobType = async (req, res) => {
+exports.createJobTypeController = async (req, res) => {
   try {
     const jobType = await JobTypeModel.create({
       jobTypeName: req.body.jobTypeName,

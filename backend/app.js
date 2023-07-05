@@ -10,6 +10,7 @@ const cookieParser = require("cookie-parser");
 const errorHandler = require("./middleware/error");
 const userRoutes = require("./routes/userRoutes");
 const authRoutes = require("./routes/authRoutes");
+const jobTypeRoutes = require("./routes/jobTypeRoutes");
 
 // db connection
 dbConnection();
@@ -27,6 +28,7 @@ app.get("/api", (req, res) => {
 });
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
+app.use("/api", jobTypeRoutes);
 
 // error middleware
 app.use(errorHandler);

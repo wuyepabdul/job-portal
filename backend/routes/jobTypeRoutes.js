@@ -4,6 +4,6 @@ const { createJobTypeController } = require("../controller/jobTypeController");
 
 const router = express.Router();
 
-router.get("/type/create", isAuthenticated, createJobTypeController);
+router.post("/type/create", isAuthenticated, createJobTypeController);
 
 module.exports = router;

@@ -13,3 +13,13 @@ exports.createJobTypeController = async (req, res) => {
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };
+
+exports.allJobTypesController = async (req, res) => {
+  try {
+    const jobTypes = await JobTypeModel.find({});
+    return res.status(200).json({ success: true, jobTypes });
+  } catch (error) {
+    console.log("All jobs error", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};

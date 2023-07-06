@@ -31,3 +31,25 @@ exports.singleJobController = async (req, res) => {
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };
+
+exports.updateJobController = async (req, res) => {
+  try {
+    const updatedJob = await JobModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    )
+      .populate("jobType", "jobTypeName")
+      .populate("user", "firstName lastName");
+    if (updatedJob) {
+      return res.status(200).json({ success: true, updatedJob });
+    } else {
+      return res
+        .status(400)
+        .json({ error: true, message: "Error occured updating job" });
+    }
+  } catch (error) {
+    console.log("update job error", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};

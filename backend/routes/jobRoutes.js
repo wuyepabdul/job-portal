@@ -4,6 +4,7 @@ const {
   createJobController,
   singleJobController,
   updateJobController,
+  showJobsController,
 } = require("../controller/jobController");
 
 const router = express.Router();
@@ -16,5 +17,6 @@ router.put(
   isAdmin,
   updateJobController
 );
+router.get("/jobs/show", showJobsController);
 
 module.exports = router;

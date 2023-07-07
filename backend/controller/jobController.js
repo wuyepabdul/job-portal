@@ -1,4 +1,5 @@
 const JobModel = require("../models/jobModel");
+const jobTypeModel = require("../models/jobTypeModel");
 
 exports.createJobController = async (req, res) => {
   try {
@@ -56,14 +57,31 @@ exports.updateJobController = async (req, res) => {
 
 exports.showJobsController = async (req, res) => {
   // search
-  const keyword =  req.query.keyword ? {title:{$regex:req.query.keyword, $option:'i'}}:{}
+  const keyword = req.query.keyword
+    ? { title: { $regex: req.query.keyword, $option: "i" } }
+    : {};
+
+  // filter job
+  let ids = [];
+  const jobTypeCategory = await jobTypeModel.find({}, { _id: 1 });
+  jobTypeCategory.forEach((cat) => {
+    ids.push(cat._id);
+  });
+
+  let cat = req.query.cat;
+  let category = cat !== "" ? cat : ids;
+
   // pagination
   const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
   // const count = await Job.find({...keyword}).estimatedDocumentCount();
-  const count = await Job.find({...keyword}).countDocument();
+  const count = await JobModel.find({
+    ...keyword,
+    jobType: category,
+  }).countDocument();
+
   try {
-    const jobs = await JobModel.find({...keyword})
+    const jobs = await JobModel.find({ ...keyword, jobType: category })
       .skip(pageSize * (page - 1))
       .limit(pageSize);
 
@@ -73,6 +91,7 @@ exports.showJobsController = async (req, res) => {
       page,
       pages: Math.ceil(count / pageSize),
       count,
+      jobTypeCategory,
     });
   } catch (error) {
     console.log("update job error", error.message);

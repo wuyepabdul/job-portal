@@ -55,15 +55,18 @@ exports.updateJobController = async (req, res) => {
 };
 
 exports.showJobsController = async (req, res) => {
+  // search
+  const keyword =  req.query.keyword ? {title:{$regex:req.query.keyword, $option:'i'}}:{}
   // pagination
   const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Job.find({}).estimatedDocumentCount();
+  // const count = await Job.find({...keyword}).estimatedDocumentCount();
+  const count = await Job.find({...keyword}).countDocument();
   try {
-    const jobs = await JobModel.find({})
+    const jobs = await JobModel.find({...keyword})
       .skip(pageSize * (page - 1))
       .limit(pageSize);
-      
+
     return res.status(200).json({
       success: true,
       jobs,

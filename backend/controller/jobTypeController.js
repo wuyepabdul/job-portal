@@ -23,3 +23,17 @@ exports.allJobTypesController = async (req, res) => {
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };
+
+exports.updateJobTypeController = async (req, res) => {
+  try {
+    const jobT = await JobTypeModel.findByIdAndUpdate(
+      req.params.type_id,
+      req.body,
+      { new: true }
+    );
+    return res.status(200).json({ success: true, jobT });
+  } catch (error) {
+    console.log("Update job type error", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};

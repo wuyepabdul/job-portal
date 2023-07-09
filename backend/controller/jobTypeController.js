@@ -37,3 +37,14 @@ exports.updateJobTypeController = async (req, res) => {
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };
+
+exports.deleteJobTypeController = async (req, res) => {
+  try {
+    const jobT = await JobTypeModel.findByIdAndRemove(req.params.type_id);
+    return res.status(200).json({ success: true, jobT });
+  } catch (error) {
+    console.log("Delete job type error", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};
+

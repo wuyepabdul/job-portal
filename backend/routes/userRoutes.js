@@ -19,6 +19,6 @@ router.delete(
   isAdmin,
   deleteUserController
 );
-router.post("/jobhistory", isAuthenticated, createUserJobsHistory);
+router.post("/user/jobhistory", isAuthenticated, createUserJobsHistory);
 
 module.exports = router;

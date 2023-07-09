@@ -36,7 +36,7 @@ exports.singleJobController = async (req, res) => {
 exports.updateJobController = async (req, res) => {
   try {
     const updatedJob = await JobModel.findByIdAndUpdate(
-      req.params.id,
+      req.params.job_id,
       req.body,
       { new: true }
     )
@@ -58,7 +58,7 @@ exports.updateJobController = async (req, res) => {
 exports.showJobsController = async (req, res) => {
   // search
   const keyword = req.query.keyword
-    ? { title: { $regex: req.query.keyword, $option: "i" } }
+    ? { title: { $regex: req.query.keyword, $options: "i" } }
     : {};
 
   // filter job
@@ -71,31 +71,16 @@ exports.showJobsController = async (req, res) => {
   let cat = req.query.cat;
   let category = cat !== "" ? cat : ids;
 
-  // display jobs by location
-  let locations = [];
-  const jobByLocation = await Job.find({}, { location: 1 });
-  jobByLocation.forEach((val) => {
-    locations.push(val.location);
-  });
-  let setUniqueLocation = [...new Set(locations)];
-  let location = req.query.location;
-  let locationFilter = location !== "" ? location : setUniqueLocation;
-
-  // pagination
+  // pagination;
   const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
   const count = await JobModel.find({
     ...keyword,
     jobType: category,
-    location: locationFilter,
-  }).countDocument();
+  }).countDocuments();
 
   try {
-    const jobs = await JobModel.find({
-      ...keyword,
-      jobType: category,
-      location: locationFilter,
-    })
+    const jobs = await JobModel.find({ ...keyword, jobType: category })
       .sort({ created: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -106,10 +91,10 @@ exports.showJobsController = async (req, res) => {
       page,
       pages: Math.ceil(count / pageSize),
       count,
-      locations,
+      ids,
     });
   } catch (error) {
-    console.log("update job error", error.message);
+    console.log("show job error", error.message);
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };

@@ -96,6 +96,7 @@ exports.showJobsController = async (req, res) => {
       jobType: category,
       location: locationFilter,
     })
+      .sort({ created: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize);
 

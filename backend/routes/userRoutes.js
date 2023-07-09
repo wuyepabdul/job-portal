@@ -5,6 +5,7 @@ const {
   singleUserController,
   editUserController,
   deleteUserController,
+  createUserJobsHistory,
 } = require("../controller/userController");
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.delete(
   isAdmin,
   deleteUserController
 );
+router.post("/jobhistory", isAuthenticated, createUserJobsHistory);
 
 module.exports = router;

@@ -4,6 +4,7 @@ const {
   createJobTypeController,
   allJobTypesController,
   updateJobTypeController,
+  deleteJobTypeController,
 } = require("../controller/jobTypeController");
 
 const router = express.Router();
@@ -15,5 +16,11 @@ router.put(
   isAuthenticated,
   isAdmin,
   updateJobTypeController
+);
+router.delete(
+  "/type/delete/:type_id",
+  isAuthenticated,
+  isAdmin,
+  deleteJobTypeController
 );
 module.exports = router;

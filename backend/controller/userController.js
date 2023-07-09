@@ -64,3 +64,30 @@ exports.deleteUserController = async (req, res) => {
     return res.status(500).json({ error: true, message: "Server error" });
   }
 };
+
+exports.createUserJobsHistory = async (req, res) => {
+  const { title, description, salary, location } = req.body;
+
+  try {
+    const currentUser = await User.findOne({ _id: req.user._id });
+    if (!currentUser) {
+      return res
+        .status(401)
+        .json({ error: true, message: "Unauthorized request. Please login" });
+    } else {
+      const addJobHistory = {
+        title,
+        description,
+        salary,
+        location,
+        user: req.user._id,
+      };
+      currentUser.jobsHistroy.push(addJobHistory);
+      await currentUser.save();
+      return res.status(200).json({ success: true, currentUser });
+    }
+  } catch (error) {
+    console.log("Delete user error", error.message);
+    return res.status(500).json({ error: true, message: "Server error" });
+  }
+};

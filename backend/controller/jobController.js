@@ -71,16 +71,31 @@ exports.showJobsController = async (req, res) => {
   let cat = req.query.cat;
   let category = cat !== "" ? cat : ids;
 
+  // display jobs by location
+  let locations = [];
+  const jobByLocation = await JobModel.find({}, { location: 1 });
+  jobByLocation.forEach((val) => {
+    locations.push(val.location);
+  });
+  let setUniqueLocation = [...new Set(locations)];
+  let location = req.query.location;
+  let locationFilter = location !== "" ? location : setUniqueLocation;
+
   // pagination;
   const pageSize = 5;
   const page = Number(req.query.pageNumber) || 1;
   const count = await JobModel.find({
     ...keyword,
     jobType: category,
+    location: locationFilter,
   }).countDocuments();
 
   try {
-    const jobs = await JobModel.find({ ...keyword, jobType: category })
+    const jobs = await JobModel.find({
+      ...keyword,
+      jobType: category,
+      location: locationFilter,
+    })
       .sort({ created: -1 })
       .skip(pageSize * (page - 1))
       .limit(pageSize);
@@ -91,7 +106,7 @@ exports.showJobsController = async (req, res) => {
       page,
       pages: Math.ceil(count / pageSize),
       count,
-      ids,
+      setUniqueLocation,
     });
   } catch (error) {
     console.log("show job error", error.message);

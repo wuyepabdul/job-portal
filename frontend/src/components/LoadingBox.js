@@ -6,7 +6,7 @@ const LoadingBox = () => {
     <>
       <Box
         sx={{
-          minHeight: "500px",
+          minHeight: "200px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

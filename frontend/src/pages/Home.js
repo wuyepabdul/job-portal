@@ -15,6 +15,7 @@ import { jobLoadAction } from "../redux/actions/jobActions";
 import { useParams } from "react-router-dom";
 import CardElement from "../components/CardElement";
 import Footer from "../components/Footer";
+import LoadingBox from "../components/LoadingBox";
 
 const Home = () => {
   const { palette } = useTheme();
@@ -52,7 +53,23 @@ const Home = () => {
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>
-              {jobs &&
+              {loading ? (
+                <LoadingBox />
+              ) : jobs && jobs.length === 0 ? (
+                <>
+                  <Box
+                    sx={{
+                      minHeight: "350px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <h2>No result found!</h2>
+                  </Box>
+                </>
+              ) : (
+                jobs &&
                 jobs.map((job, i) => (
                   <CardElement
                     key={i}
@@ -61,7 +78,8 @@ const Home = () => {
                     category={job.jobType ? job.jobType : "No Category"}
                     location={job.location}
                   />
-                ))}
+                ))
+              )}
               <Stack spacing={2}>
                 <Pagination
                   page={page}

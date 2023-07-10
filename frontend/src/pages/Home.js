@@ -61,7 +61,13 @@ const Home = () => {
                     location={job.location}
                   />
                 ))}
-             
+              <Stack spacing={2}>
+                <Pagination
+                  page={page}
+                  count={pages === 0 ? 1 : pages}
+                  onChange={(event, value) => setPage(value)}
+                />
+              </Stack>
             </Box>
           </Stack>
         </Container>

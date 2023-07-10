@@ -2,13 +2,13 @@ import { Box, useTheme } from "@mui/material";
 import React from "react";
 
 const Footer = () => {
-  const palette = useTheme();
+  const { palette } = useTheme();
   return (
     <>
       <Box
         sx={{
           height: "70px",
-          bgcolor: palette.secondary.midNightBlue,
+          bgcolor: palette.midNightBlue,
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

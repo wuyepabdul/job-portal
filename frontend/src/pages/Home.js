@@ -8,10 +8,12 @@ import {
   Container,
   Stack,
   Typography,
+  Pagination,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { jobLoadAction } from "../redux/actions/jobActions";
 import { useParams } from "react-router-dom";
+import CardElement from "../components/CardElement";
 
 const Home = () => {
   const { palette } = useTheme();
@@ -49,7 +51,17 @@ const Home = () => {
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>
-              {jobs && jobs.map((job) => <h1>{job.title}</h1>)}
+              {jobs &&
+                jobs.map((job, i) => (
+                  <CardElement
+                    key={i}
+                    jobTitle={job.title}
+                    description={job.description}
+                    category={job.jobType ? job.jobType : "No Category"}
+                    location={job.location}
+                  />
+                ))}
+             
             </Box>
           </Stack>
         </Container>

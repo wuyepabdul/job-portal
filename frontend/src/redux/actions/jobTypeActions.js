@@ -11,7 +11,6 @@ export const jobTypeLoadAction = () => async (dispatch) => {
     const { data } = await axios.get("/api/type/jobs");
     dispatch({ type: JOB_TYPE_LOAD_SUCCESS, payload: data });
   } catch (error) {
-    console.log("error", error);
     dispatch({
       type: JOB_TYPE_LOAD_FAIL,
       payload: error.response.data.message,

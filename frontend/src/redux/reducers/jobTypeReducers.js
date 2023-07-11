@@ -6,7 +6,6 @@ import {
 } from "../constants/jobTypeConstants";
 
 export const loadJobTypeReducer = (state = { jobTypes: [] }, action) => {
-  console.log("action", action);
   switch (action.type) {
     case JOB_TYPE_LOAD_REQUEST:
       return { loading: true };

@@ -5,12 +5,12 @@ import {
   JOB_TYPE_LOAD_SUCCESS,
 } from "../constants/jobTypeConstants";
 
-export const loadJobTypeReducer = (state = { jobType: [] }, action) => {
+export const loadJobTypeReducer = (state = { jobTypes: [] }, action) => {
   switch (action) {
     case JOB_TYPE_LOAD_REQUEST:
       return { loading: true };
     case JOB_TYPE_LOAD_SUCCESS:
-      return { loading: false, jobType: action.payload.jobT };
+      return { loading: false, jobTypes: action.payload.jobT };
     case JOB_TYPE_LOAD_FAIL:
       return { loading: false, error: action.payload };
     case JOB_TYPE_LOAD_RESET:

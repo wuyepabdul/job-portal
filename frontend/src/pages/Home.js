@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import Header from "../components/Header";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Box,
   useTheme,
@@ -9,10 +10,13 @@ import {
   Stack,
   Typography,
   Pagination,
+  MenuList,
+  MenuItem,
+  ListItemIcon,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { jobLoadAction } from "../redux/actions/jobActions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import CardElement from "../components/CardElement";
 import Footer from "../components/Footer";
 import LoadingBox from "../components/LoadingBox";
@@ -64,6 +68,36 @@ const Home = () => {
                   handleChangeCategory={handleChangeCategory}
                   cat={cat}
                 />
+              </Card>
+
+              {/* filter by location */}
+              <Card sx={{ minWidth: 150, mb: 3, mt: 3, p: 2 }}>
+                <Box sx={{ pb: 2 }}>
+                  <Typography
+                    component="h4"
+                    sx={{ color: palette.secondary.main, fontWeight: 600 }}
+                  >
+                    Filter jobs by location
+                  </Typography>
+                  <MenuList>
+                    {setUniqueLocation &&
+                      setUniqueLocation.map((location, i) => (
+                        <MenuItem key={i}>
+                          <ListItemIcon>
+                            <LocationOnIcon
+                              sx={{
+                                color: palette.secondary.main,
+                                fontSize: 18,
+                              }}
+                            ></LocationOnIcon>
+                            <Link to={`/search/location/${location}`}>
+                              {location}
+                            </Link>
+                          </ListItemIcon>
+                        </MenuItem>
+                      ))}
+                  </MenuList>
+                </Box>
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>

@@ -3,7 +3,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const SelectComponent = ({ handleChangeCategory, cat }) => {
-  const { jobTypes } = useSelector((state) => state.jobTypes);
+  const { jobTypes } = useSelector((state) => state.loadJobTypes);
+  const storeState = useSelector((state) => state);
 
   return (
     <Box sx={{ minWidth: 120 }}>

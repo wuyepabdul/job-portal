@@ -17,6 +17,7 @@ import CardElement from "../components/CardElement";
 import Footer from "../components/Footer";
 import LoadingBox from "../components/LoadingBox";
 import SelectComponent from "../components/SelectComponent";
+import { jobTypeLoadAction } from "../redux/actions/jobTypeActions";
 
 const Home = () => {
   const { palette } = useTheme();
@@ -29,8 +30,16 @@ const Home = () => {
   );
 
   useEffect(() => {
+    dispatch(jobTypeLoadAction());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(jobLoadAction(page, keyword, cat, location));
-  }, [page, keyword, cat, location]);
+  }, [dispatch, page, keyword, cat, location]);
+
+  const handleChangeCategory = (e) => {
+    setCat(e.target.value);
+  };
   return (
     <>
       <Box sx={{ bgcolor: "#fafafa", minHeight: "100vh " }}>
@@ -51,7 +60,10 @@ const Home = () => {
                     Filter Job by category
                   </Typography>
                 </Box>
-                <SelectComponent />
+                <SelectComponent
+                  handleChangeCategory={handleChangeCategory}
+                  cat={cat}
+                />
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>

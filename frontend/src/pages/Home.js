@@ -16,6 +16,7 @@ import { useParams } from "react-router-dom";
 import CardElement from "../components/CardElement";
 import Footer from "../components/Footer";
 import LoadingBox from "../components/LoadingBox";
+import SelectComponent from "../components/SelectComponent";
 
 const Home = () => {
   const { palette } = useTheme();
@@ -50,6 +51,7 @@ const Home = () => {
                     Filter Job by category
                   </Typography>
                 </Box>
+                <SelectComponent />
               </Card>
             </Box>
             <Box sx={{ flex: 5, p: 2 }}>

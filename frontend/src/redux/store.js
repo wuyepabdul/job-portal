@@ -3,10 +3,12 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { loadJobReducer } from "./reducers/jobReducers";
 import { loadJobTypeReducer } from "./reducers/jobTypeReducers";
+import { userSigninReducer } from "./reducers/userReducer";
 
 const reducer = combineReducers({
   loadJobs: loadJobReducer,
   loadJobTypes: loadJobTypeReducer,
+  signin: userSigninReducer,
 });
 
 let initialState = {};

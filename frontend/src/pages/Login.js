@@ -11,11 +11,11 @@ const validationSchema = yup.object({
   email: yup
     .string("Enter your email")
     .email("Enter a valid email")
-    .required("Field cannot be empty"),
+    .required("Email cannot be empty"),
   password: yup
     .string("Enter your password")
     .min(8, "Password length should be of minimum 8 characters")
-    .required("Field cannot be empty"),
+    .required("Password cannot be empty"),
 });
 
 const Login = () => {

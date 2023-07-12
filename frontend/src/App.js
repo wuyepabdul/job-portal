@@ -7,6 +7,7 @@ import { theme } from "./theme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
+import "./App.css";
 
 const App = () => {
   return (

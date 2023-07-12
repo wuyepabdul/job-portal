@@ -3,9 +3,10 @@ import React from "react";
 import LockClockOutlined from "@mui/icons-material/LockClockOutlined";
 import * as yup from "yup";
 import { useFormik } from "formik";
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useDispatch } from "react-redux";
+import { userSigninAction } from "../redux/actions/userActions";
 
 const validationSchema = yup.object({
   email: yup
@@ -19,6 +20,8 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -26,7 +29,8 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values, actions) => {
-      alert(JSON.stringify(values, null, 2));
+      //   alert(JSON.stringify(values, null, 2));
+      dispatch(userSigninAction(values));
       actions.resetForm();
     },
   });
@@ -76,6 +80,7 @@ const Login = () => {
               id="password"
               name="password"
               label="Password"
+              type="password"
               InputLabelProps={{ shrink: true }}
               placeholder="Password"
               value={formik.values.password}

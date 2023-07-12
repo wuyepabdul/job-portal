@@ -12,9 +12,14 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import { Link } from "react-router-dom";
 
-const pages = ["Home", "Pages"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["Home"];
+const settings = [
+  { title: "Dashboard", url: "/dashboard" },
+  { title: "Login", url: "/login" },
+  { title: "Logout", url: "logout" },
+];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -149,7 +154,9 @@ function Navbar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center">
+                    <Link to={setting.url}>{setting.title}</Link>
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

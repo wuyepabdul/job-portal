@@ -1,12 +1,13 @@
 import { Avatar, Box, Button, TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import LockClockOutlined from "@mui/icons-material/LockClockOutlined";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { userSigninAction } from "../redux/actions/userActions";
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -21,6 +22,13 @@ const validationSchema = yup.object({
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isAuthenticated } = useSelector((state) => state.signin);
+
+  useEffect(() => {
+    navigate("/user/dashboard");
+  }, [navigate,isAuthenticated]);
 
   const formik = useFormik({
     initialValues: {

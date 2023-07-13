@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 const pages = ["Home"];
 const settings = [
-  { title: "Dashboard", url: "/dashboard" },
+  { title: "Dashboard", url: "/user/dashboard" },
   { title: "Login", url: "/login" },
   { title: "Logout", url: "logout" },
 ];

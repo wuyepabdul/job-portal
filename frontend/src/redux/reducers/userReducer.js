@@ -12,7 +12,7 @@ export const userSigninReducer = (state = {}, action) => {
     case USER_SIGNIN_SUCCESS:
       return {
         loading: false,
-        userInfor: action.payload,
+        userInfo: action.payload,
         isAuthenticated: true,
       };
     case USER_SIGNIN_FAIL:

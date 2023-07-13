@@ -20,22 +20,15 @@ const SearchInput = () => {
     actions.resetForm();
   };
 
-  const {
-    values,
-    errors,
-    touched,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-  } = useFormik({
-    initialValues: {
-      search: "",
-    },
+  const { values, errors, touched, handleChange, handleSubmit, isSubmitting } =
+    useFormik({
+      initialValues: {
+        search: "",
+      },
 
-    validationSchema: validationSchema,
-    onSubmit,
-  });
+      validationSchema: validationSchema,
+      onSubmit,
+    });
 
   return (
     <form onSubmit={handleSubmit} style={{ width: "50%" }}>

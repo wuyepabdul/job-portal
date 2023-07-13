@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import SidebarAdmin from "./SidebarAdmin";
+import HeaderTop from "./HeaderTop";
 
 const Layout = (Component)=>(   {...props}) => {
   return <>

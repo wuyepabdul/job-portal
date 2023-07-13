@@ -48,7 +48,10 @@ const Navbar = () => {
 
   const handleLogoutUser = () => {
     dispatch(userLogoutAction());
-    navigate("/");
+    window.location.reload(true);
+    setTimeout(() => {
+      navigate("/");
+    }, 500);
   };
 
   return (

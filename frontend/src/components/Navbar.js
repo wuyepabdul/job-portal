@@ -13,19 +13,17 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "@mui/material";
 import { userLogoutAction } from "../redux/actions/userActions";
 
 const pages = ["Home"];
-const settings = [
-  { title: "Dashboard", url: "/user/dashboard" },
-  { title: "Login", url: "/login" },
-];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { userInfo } = useSelector((state) => state.signin);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -53,6 +51,15 @@ const Navbar = () => {
       navigate("/");
     }, 500);
   };
+
+  const settings = [
+    {
+      id: "1",
+      title: "Dashboard",
+      url: "/user/dashboard",
+      onCLick: handleCloseUserMenu,
+    },
+  ];
 
   return (
     <AppBar position="static">
@@ -166,31 +173,56 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
+              {userInfo ? (
+                settings.map((setting) => (
+                  <MenuItem key={setting.id} onClick={setting.onCLick}>
+                    <Typography textAlign="center">
+                      <Link
+                        style={{
+                          textDecoration: "none",
+                          color: "blue",
+                        }}
+                        to={setting.url}
+                      >
+                        {setting.title}
+                      </Link>
+                    </Typography>
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography
+                    style={{
+                      textDecoration: "none",
+                      color: "blue",
+                    }}
+                    textAlign="center"
+                  >
                     <Link
                       style={{
                         textDecoration: "none",
                         color: "blue",
                       }}
-                      to={setting.url}
+                      to="/login"
                     >
-                      {setting.title}
+                      Login
                     </Link>
                   </Typography>
                 </MenuItem>
-              ))}
-              <MenuItem onClick={handleLogoutUser}>
-                <Typography
-                  style={{
-                    textDecoration: "none",
-                    color: "blue",
-                  }}
-                >
-                  Logout
-                </Typography>
-              </MenuItem>
+              )}
+              {userInfo && (
+                <MenuItem onClick={handleLogoutUser}>
+                  <Typography
+                    style={{
+                      textDecoration: "none",
+                      color: "blue",
+                    }}
+                    textAlign="center"
+                  >
+                    Logout
+                  </Typography>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
         </Toolbar>

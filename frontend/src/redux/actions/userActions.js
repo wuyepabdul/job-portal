@@ -14,6 +14,11 @@ export const userSigninAction = (user) => async (dispatch) => {
   try {
     const { data } = await axios.post("/api/signin", user);
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
+    localStorage.setItem("userInfo", JSON.stringify({
+      isAuthenticated: true,
+      loading: false,
+      user: data.user,
+    }));
     toast.success("Login Successful");
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.response.data.message });
@@ -23,12 +28,11 @@ export const userSigninAction = (user) => async (dispatch) => {
 
 export const userLogoutAction = () => async (dispatch) => {
   dispatch({ type: USER_LOGOUT_REQUEST });
-
   try {
     const { data } = await axios.get("/api/logout");
     dispatch({ type: USER_LOGOUT_SUCCESS, payload: data });
-    toast.success("Logout Successfull");
     localStorage.removeItem("userInfo");
+    toast.success("Logout Successfull");
   } catch (error) {
     dispatch({ type: USER_LOGOUT_FAIL, payload: error.response.data.message });
     toast.error("Logout Fail");

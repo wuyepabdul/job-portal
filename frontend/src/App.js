@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./pages/Login";
 import "./App.css";
 import UserDashboard from "./pages/user/UserDashboard";
+import UserRoute from "./components/UserRoute";
 
 const App = () => {
   return (
@@ -20,7 +21,15 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/user/dashboard" element={<UserDashboard />} />
+            <Route
+              path="/user/dashboard"
+              element={
+                <UserRoute>
+                  {" "}
+                  <UserDashboard />
+                </UserRoute>
+              }
+            />
             <Route path="/search/location/:location" element={<Home />} />
             <Route path="/search/:keyword" element={<Home />} />
             <Route path="*" element={<NotFound />} />

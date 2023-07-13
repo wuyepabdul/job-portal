@@ -3,16 +3,21 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import { loadJobReducer } from "./reducers/jobReducers";
 import { loadJobTypeReducer } from "./reducers/jobTypeReducers";
-import { userSigninReducer } from "./reducers/userReducer";
+import { userLogoutReducer, userSigninReducer } from "./reducers/userReducer";
 
 const reducer = combineReducers({
   loadJobs: loadJobReducer,
   loadJobTypes: loadJobTypeReducer,
   signin: userSigninReducer,
+  logout: userLogoutReducer,
 });
 
 let initialState = {
-    signin:{userInfo:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) :null }
+  signin: {
+    userInfo: localStorage.getItem("userInfo")
+      ? JSON.parse(localStorage.getItem("userInfo"))
+      : null,
+  },
 };
 const middleware = [thunk];
 

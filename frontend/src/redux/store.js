@@ -11,7 +11,9 @@ const reducer = combineReducers({
   signin: userSigninReducer,
 });
 
-let initialState = {};
+let initialState = {
+    signin:{userInfo:localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) :null }
+};
 const middleware = [thunk];
 
 const store = createStore(

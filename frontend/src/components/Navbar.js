@@ -12,18 +12,24 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useTheme } from "@mui/material";
+import { userLogoutAction } from "../redux/actions/userActions";
 
 const pages = ["Home"];
 const settings = [
   { title: "Dashboard", url: "/user/dashboard" },
   { title: "Login", url: "/login" },
-  { title: "Logout", url: "logout" },
 ];
 
-function Navbar() {
+const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { palette } = useTheme();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,6 +44,11 @@ function Navbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleLogoutUser = () => {
+    dispatch(userLogoutAction());
+    navigate("/");
   };
 
   return (
@@ -155,15 +166,33 @@ function Navbar() {
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    <Link to={setting.url}>{setting.title}</Link>
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "blue",
+                      }}
+                      to={setting.url}
+                    >
+                      {setting.title}
+                    </Link>
                   </Typography>
                 </MenuItem>
               ))}
+              <MenuItem onClick={handleLogoutUser}>
+                <Typography
+                  style={{
+                    textDecoration: "none",
+                    color: "blue",
+                  }}
+                >
+                  Logout
+                </Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
   );
-}
+};
 export default Navbar;

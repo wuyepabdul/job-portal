@@ -14,11 +14,12 @@ import Avatar from "@mui/material/Avatar";
 import logoDashboard from "../../images/hr-project.png";
 import LoginIcon from "@mui/icons-material/Login";
 import { Box, useTheme } from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogoutAction } from "../../redux/actions/userActions";
 
 const SidebarAdmin = () => {
+  const { userInfo } = useSelector((state) => state.signin);
   const { palette } = useTheme();
   const { collapsed } = useProSidebar();
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const SidebarAdmin = () => {
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 {" "}
                 <img
+                  alt="avatar"
                   style={{
                     width: "100px",
                     height: "100%",
@@ -74,25 +76,49 @@ const SidebarAdmin = () => {
             },
           }}
         >
-          <MenuItem
-            component={<Link to="/admin/dashboard" />}
-            icon={<DashboardIcon />}
-          >
-            Dashboard
-          </MenuItem>
-          <MenuItem
-            component={<Link to="/admin/users" />}
-            icon={<GroupAddIcon />}
-          >
-            Users
-          </MenuItem>
-          <MenuItem component={<Link to="/admin/jobs" />} icon={<WorkIcon />}>
-            Jobs
-          </MenuItem>
-          <MenuItem
-            component={<Link to="/admin/category" />}
-            icon={<CategoryIcon />}
-          ></MenuItem>
+          {userInfo && userInfo.role === 1 ? (
+            <>
+              <MenuItem
+                component={<Link to="/admin/dashboard" />}
+                icon={<DashboardIcon />}
+              >
+                Dashboard
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/admin/users" />}
+                icon={<GroupAddIcon />}
+              >
+                Users
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/admin/jobs" />}
+                icon={<WorkIcon />}
+              >
+                Jobs
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/admin/category" />}
+                icon={<CategoryIcon />}
+              >
+                Category
+              </MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem
+                component={<Link to="/user/dashboard" />}
+                icon={<DashboardIcon />}
+              >
+                Dashboard
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/user/jobs" />}
+                icon={<GroupAddIcon />}
+              >
+                Applied Jobs
+              </MenuItem>
+            </>
+          )}
         </Menu>
       </Box>
       <Box sx={{ pb: 2 }}>

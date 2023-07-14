@@ -13,12 +13,17 @@ export const userSigninAction = (user) => async (dispatch) => {
   dispatch({ type: USER_SIGNIN_REQUEST });
   try {
     const { data } = await axios.post("/api/signin", user);
+    console.log("data", data);
+
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    localStorage.setItem("userInfo", JSON.stringify({
-      isAuthenticated: true,
-      loading: false,
-      user: data.user,
-    }));
+    localStorage.setItem(
+      "userInfo",
+      JSON.stringify({
+        isAuthenticated: true,
+        loading: false,
+        user: data.user,
+      })
+    );
     toast.success("Login Successful");
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.response.data.message });

@@ -17,6 +17,8 @@ import { Box, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogoutAction } from "../../redux/actions/userActions";
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+// import logo from '../../images/hr-project.png'
 
 const SidebarAdmin = () => {
   const { userInfo } = useSelector((state) => state.signin);
@@ -55,6 +57,7 @@ const SidebarAdmin = () => {
                     height: "100%",
                     textAlign: "center",
                   }}
+                  src={logoDashboard}
                 />{" "}
               </Box>
             )}
@@ -113,7 +116,7 @@ const SidebarAdmin = () => {
               </MenuItem>
               <MenuItem
                 component={<Link to="/user/jobs" />}
-                icon={<GroupAddIcon />}
+                icon={<WorkHistoryIcon />}
               >
                 Applied Jobs
               </MenuItem>

@@ -1,6 +1,9 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
+  USER_LOAD_FAIL,
+  USER_LOAD_REQUEST,
+  USER_LOAD_SUCCESS,
   USER_LOGOUT_FAIL,
   USER_LOGOUT_REQUEST,
   USER_LOGOUT_SUCCESS,
@@ -26,6 +29,16 @@ export const userSigninAction = (user) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error.response.data.message });
     toast.error(error.response.data.message);
+  }
+};
+
+export const userProfileAction = () => async (dispatch) => {
+  dispatch({ type: USER_LOAD_REQUEST });
+  try {
+    const { data } = await axios.get("/api/me");
+    dispatch({ type: USER_LOAD_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: USER_LOAD_FAIL, payload: error.response.data.message });
   }
 };
 

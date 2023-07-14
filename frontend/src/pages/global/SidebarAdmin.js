@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogoutAction } from "../../redux/actions/userActions";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
-// import logo from '../../images/hr-project.png'
+import Person3Icon from "@mui/icons-material/Person3";
 
 const SidebarAdmin = () => {
   const { userInfo } = useSelector((state) => state.signin);
@@ -119,6 +119,12 @@ const SidebarAdmin = () => {
                 icon={<WorkHistoryIcon />}
               >
                 Applied Jobs
+              </MenuItem>
+              <MenuItem
+                component={<Link to="/user/info" />}
+                icon={<Person3Icon />}
+              >
+                Personal Info
               </MenuItem>
             </>
           )}

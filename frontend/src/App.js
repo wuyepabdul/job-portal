@@ -12,8 +12,10 @@ import "./App.css";
 import UserDashboard from "./pages/user/UserDashboard";
 import UserRoute from "./components/UserRoute";
 import Layout from "./pages/global/Layout";
+import UserJobsHistory from "./pages/user/UserJobsHistory";
 
 const UserDashboardHOC = Layout(UserDashboard);
+const UserJobsHistoryHOC = Layout(UserJobsHistory);
 
 const App = () => {
   return (
@@ -32,6 +34,15 @@ const App = () => {
                   <UserRoute>
                     {" "}
                     <UserDashboardHOC />
+                  </UserRoute>
+                }
+              />
+              <Route
+                path="/user/jobs"
+                element={
+                  <UserRoute>
+                    {" "}
+                    <UserJobsHistoryHOC />
                   </UserRoute>
                 }
               />

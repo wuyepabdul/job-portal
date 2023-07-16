@@ -24,13 +24,17 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isAuthenticated } = useSelector((state) => state.signin);
-
+  const { isAuthenticated, role } = useSelector((state) => state.signin);
+  const { userInfo } = useSelector((state) => state.signin);
+  // const
   useEffect(() => {
-    if (isAuthenticated) {
+    if (userInfo && userInfo.role === 1) {
+      navigate("/admin/dashboard");
+    }
+    if (userInfo && userInfo.role === 0) {
       navigate("/user/dashboard");
     }
-  }, [navigate, isAuthenticated]);
+  }, [navigate, isAuthenticated, role]);
 
   const formik = useFormik({
     initialValues: {

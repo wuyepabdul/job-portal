@@ -55,8 +55,8 @@ const Navbar = () => {
   const settings = [
     {
       id: "1",
-      title: "Dashboard",
-      url: "/user/dashboard",
+      title: "Admin Dashboard",
+      url: "/admin/dashboard",
       onCLick: handleCloseUserMenu,
     },
   ];
@@ -173,7 +173,8 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {userInfo ? (
+              {userInfo &&
+                userInfo.role === 1 &&
                 settings.map((setting) => (
                   <MenuItem key={setting.id} onClick={setting.onCLick}>
                     <Typography textAlign="center">
@@ -188,7 +189,42 @@ const Navbar = () => {
                       </Link>
                     </Typography>
                   </MenuItem>
-                ))
+                ))}
+
+              {userInfo && userInfo.role === 0 && (
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography
+                    style={{
+                      textDecoration: "none",
+                      color: "blue",
+                    }}
+                    textAlign="center"
+                  >
+                    <Link
+                      style={{
+                        textDecoration: "none",
+                        color: "blue",
+                      }}
+                      to="/user/dashboard"
+                    >
+                      User Dashboard
+                    </Link>
+                  </Typography>
+                </MenuItem>
+              )}
+
+              {userInfo ? (
+                <MenuItem onClick={handleLogoutUser}>
+                  <Typography
+                    style={{
+                      textDecoration: "none",
+                      color: "blue",
+                    }}
+                    textAlign="center"
+                  >
+                    Logout
+                  </Typography>
+                </MenuItem>
               ) : (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography
@@ -207,19 +243,6 @@ const Navbar = () => {
                     >
                       Login
                     </Link>
-                  </Typography>
-                </MenuItem>
-              )}
-              {userInfo && (
-                <MenuItem onClick={handleLogoutUser}>
-                  <Typography
-                    style={{
-                      textDecoration: "none",
-                      color: "blue",
-                    }}
-                    textAlign="center"
-                  >
-                    Logout
                   </Typography>
                 </MenuItem>
               )}

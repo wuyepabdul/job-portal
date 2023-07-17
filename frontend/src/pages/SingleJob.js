@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadSingleJobAction } from "../redux/actions/jobActions";
 import Navbar from "../components/Navbar";
 import { Button, Card, CardContent, Stack, Typography } from "@mui/material";
+import { userApplyJobsAction } from "../redux/actions/userActions";
 
 const SingleJob = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,16 @@ const SingleJob = () => {
     dispatch(loadSingleJobAction(id));
   }, [dispatch, id]);
 
+  const handleApplyJob = () => {
+    dispatch(
+      userApplyJobsAction({
+        title: singleJob && singleJob.title,
+        description: singleJob && singleJob.description,
+        salary: singleJob && singleJob.salary,
+        location: singleJob && singleJob.location,
+      })
+    );
+  };
   return (
     <>
       <Box sx={{ bgcolor: "#fafafa" }}>
@@ -73,7 +84,11 @@ const SingleJob = () => {
               </Box>
               <Box sx={{ flex: 1, p: 2 }}>
                 <Card sx={{ p: 2 }}>
-                  <Button sx={{ fontSize: "13px" }} variant="contained">
+                  <Button
+                    onClick={handleApplyJob}
+                    sx={{ fontSize: "13px" }}
+                    variant="contained"
+                  >
                     Apply for Job
                   </Button>
                 </Card>

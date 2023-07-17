@@ -4,8 +4,11 @@ import StatComponent from "../../components/StatComponent";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import WorkIcon from "@mui/icons-material/Work";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
 const UserDashboard = () => {
+  const { user } = useSelector((state) => state.userProfile);
   return (
     <>
       <Box>
@@ -17,16 +20,14 @@ const UserDashboard = () => {
           spacing={{ xs: 1, sm: 2, md: 4 }}
         >
           <StatComponent
-            value="45621"
-            icon={
-              <CalendarMonthIcon sx={{ color: "#fafafa", fontSize: 30 }} />
-            }
+            value={user && moment(user.createdAt).format('YYYY / MM / DD')}
+            icon={<CalendarMonthIcon sx={{ color: "#fafafa", fontSize: 30 }} />}
             description="Member since"
             money=""
           />
 
           <StatComponent
-            value="450"
+            value={user && user.jobsHistroy.length}
             icon={<WorkIcon sx={{ color: "#fafafa", fontSize: 30 }} />}
             description="Number of applied jobs"
             money=""

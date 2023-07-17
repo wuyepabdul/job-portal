@@ -3,6 +3,9 @@ import {
   USER_APPLY_JOB_REQUEST,
   USER_APPLY_JOB_RESET,
   USER_APPLY_JOB_SUCCESS,
+  USER_LOAD_ALL_FAIL,
+  USER_LOAD_ALL_REQUEST,
+  USER_LOAD_ALL_SUCCESS,
   USER_LOAD_FAIL,
   USER_LOAD_REQUEST,
   USER_LOAD_RESET,
@@ -86,6 +89,21 @@ export const userApplyJobsReducer = (state = {}, action) => {
     case USER_APPLY_JOB_FAIL:
       return { loading: false, error: action.payload };
     case USER_APPLY_JOB_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const allUsersReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case USER_LOAD_ALL_REQUEST:
+      return { loading: true, users: [] };
+    case USER_LOAD_ALL_SUCCESS:
+      return { loading: false, users: action.payload.users };
+    case USER_LOAD_ALL_FAIL:
+      return { loading: false, users: [], error: action.payload };
+    case USER_LOAD_RESET:
       return {};
     default:
       return state;

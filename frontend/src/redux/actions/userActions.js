@@ -3,6 +3,9 @@ import { toast } from "react-toastify";
 import {
   USER_APPLY_JOB_REQUEST,
   USER_APPLY_JOB_SUCCESS,
+  USER_LOAD_ALL_FAIL,
+  USER_LOAD_ALL_REQUEST,
+  USER_LOAD_ALL_SUCCESS,
   USER_LOAD_FAIL,
   USER_LOAD_REQUEST,
   USER_LOAD_SUCCESS,
@@ -53,6 +56,19 @@ export const userApplyJobsAction = (job) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: USER_LOAD_FAIL, payload: error.response.data.message });
     toast.error("Error applying for job ");
+  }
+};
+
+export const allUsersAction = () => async (dispatch) => {
+  dispatch({ type: USER_LOAD_ALL_REQUEST });
+  try {
+    const { data } = await axios.get("/api/allusers");
+    dispatch({ type: USER_LOAD_ALL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_LOAD_ALL_FAIL,
+      payload: error.response.data.message,
+    });
   }
 };
 

@@ -13,7 +13,7 @@ import UserDashboard from "./pages/user/UserDashboard";
 import UserRoute from "./components/UserRoute";
 import Layout from "./pages/global/Layout";
 import UserJobsHistory from "./pages/user/UserJobsHistory";
-import AdminDashboard from "./pages/user/AdminDashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserInfoDashboard from "./pages/user/UserInfoDashboard";
 
 const UserDashboardHOC = Layout(UserDashboard);

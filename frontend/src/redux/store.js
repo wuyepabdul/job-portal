@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
-import { loadJobReducer } from "./reducers/jobReducers";
+import { loadJobReducer, loadSingleJobReducer } from "./reducers/jobReducers";
 import { loadJobTypeReducer } from "./reducers/jobTypeReducers";
 import {
   userLogoutReducer,
@@ -15,6 +15,7 @@ const reducer = combineReducers({
   signin: userSigninReducer,
   logout: userLogoutReducer,
   userProfile: userProfileReducer,
+  singleJob: loadSingleJobReducer,
 });
 
 let initialState = {

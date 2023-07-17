@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Sidebar,
   Menu,
@@ -16,7 +16,10 @@ import LoginIcon from "@mui/icons-material/Login";
 import { Box, useTheme } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { userLogoutAction } from "../../redux/actions/userActions";
+import {
+  userLogoutAction,
+  userProfileAction,
+} from "../../redux/actions/userActions";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import Person3Icon from "@mui/icons-material/Person3";
 
@@ -34,6 +37,10 @@ const SidebarAdmin = () => {
       navigate("/login");
     }, 500);
   };
+
+  useEffect(() => {
+    dispatch(userProfileAction());
+  }, [dispatch]);
   return (
     <Sidebar backgroundColor="#003366" style={{ borderRightStyle: "none" }}>
       <Box

@@ -15,7 +15,7 @@ const reducer = combineReducers({
   signin: userSigninReducer,
   logout: userLogoutReducer,
   userProfile: userProfileReducer,
-  singleJob: loadSingleJobReducer,
+  loadSingleJob: loadSingleJobReducer,
 });
 
 let initialState = {

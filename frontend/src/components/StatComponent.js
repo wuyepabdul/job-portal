@@ -7,7 +7,7 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const StateComponent = ({ value, icon, description, money }) => {
+const StatComponent = ({ value, icon, description, money }) => {
   const { palette } = useTheme();
 
   return (
@@ -30,4 +30,4 @@ const StateComponent = ({ value, icon, description, money }) => {
   );
 };
 
-export default StateComponent;
+export default StatComponent;

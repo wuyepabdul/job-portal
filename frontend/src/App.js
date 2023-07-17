@@ -50,12 +50,12 @@ const App = () => {
                   </UserRoute>
                 }
               />
-               <Route
+              <Route
                 path="/user/info"
                 element={
                   <UserRoute>
                     {" "}
-                    <AdminUserDashboardHOC />
+                    <UserInfoDashboardHOC />
                   </UserRoute>
                 }
               />

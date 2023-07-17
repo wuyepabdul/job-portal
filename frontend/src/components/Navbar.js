@@ -173,7 +173,6 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {console.log("userInfo", userInfo)}
               {userInfo &&
                 userInfo.role === 1 &&
                 settings.map((setting) => (
@@ -191,7 +190,7 @@ const Navbar = () => {
                     </Typography>
                   </MenuItem>
                 ))}
-                
+
               {userInfo && userInfo.role === 0 && (
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography

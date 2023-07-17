@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import "./App.css";
 import UserDashboard from "./pages/user/UserDashboard";
 import UserRoute from "./components/UserRoute";
+import AdminRoute from "./components/AdminRoute";
 import Layout from "./pages/global/Layout";
 import UserJobsHistory from "./pages/user/UserJobsHistory";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -44,10 +45,10 @@ const App = () => {
               <Route
                 path="/admin/dashboard"
                 element={
-                  <UserRoute>
+                  <AdminRoute>
                     {" "}
                     <AdminUserDashboardHOC />
-                  </UserRoute>
+                  </AdminRoute>
                 }
               />
               <Route

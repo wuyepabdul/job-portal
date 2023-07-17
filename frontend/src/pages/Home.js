@@ -121,6 +121,7 @@ const Home = () => {
                 jobs.map((job, i) => (
                   <CardElement
                     key={i}
+                    id={job._id}
                     jobTitle={job.title}
                     description={job.description}
                     category={job.jobType ? job.jobType : "No Category"}

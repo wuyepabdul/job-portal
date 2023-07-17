@@ -2,11 +2,11 @@ import { Box, Card, CardContent, Typography, useTheme } from "@mui/material";
 import React from "react";
 
 const UserInfoDashboard = () => {
-  const palette = useTheme();
+  const { palette } = useTheme();
 
   return (
-    <Box sx={{ maxWidth: "50%", margin: "auto", pt: "10" }}>
-      <Card sx={{ minWidth: 275, bgcolor: palette.secondary.midNightBlue }}>
+    <Box sx={{ maxWidth: "50%", margin: "auto", pt: 10 }}>
+      <Card sx={{ minWidth: 275, bgcolor: palette.midNightBlue }}>
         <CardContent>
           <Typography sx={{ fontSize: 16, color: "#fafafa" }} gutterBottom>
             Personal info

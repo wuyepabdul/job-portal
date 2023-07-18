@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import moment from "moment";
 import { Box, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { DataGrid, gridClasses } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar, gridClasses } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import { useDispatch, useSelector } from "react-redux";
 import { allUsersAction } from "../../redux/actions/userActions";
@@ -91,6 +91,7 @@ const DashUsers = () => {
               pageSize={3}
               rowsPerPageOptions={[3]}
               checkboxSelection
+              slots={{toolbar:GridToolbar}}
             />
           </Box>
         </Paper>

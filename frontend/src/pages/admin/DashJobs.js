@@ -24,7 +24,61 @@ const DashJobs = () => {
 
   const columns = [
     { field: "_id", headerName: "Job ID", width: 150, editable: true },
-   
+    { field: "title", headerName: "Title", width: 150 },
+    {
+      field: "jobType",
+      headerName: " Category",
+      width: 150,
+      valueGetter: (data) => data.row.jobType.jobTypeName,
+    },
+    {
+      field: "user",
+      headerName: "User",
+      width: 150,
+      valueGetter: (data) => data.row.user.firstName,
+    },
+    {
+      field: "available",
+      headerName: "Available",
+      width: 150,
+      renderCell: (values) => (values.row.available ? "Yes" : "No"),
+    },
+    {
+      field: "salary",
+      headerName:'Salary',
+      width: 150,
+      renderCell: (values) => ('$' + values.row.salary),
+    },
+    {
+      field: "Actions",
+      width: 200,
+      renderCell: (values) => (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "170px",
+          }}
+        >
+          <Button variant="contained">
+            <Link
+              style={{ color: "white", textDecoration: "none" }}
+              to={`/admin/edit/job/${values.row_id}`}
+            >
+              {" "}
+              Edit
+            </Link>
+          </Button>
+          <Button
+            onClick={(e) => deleteJobById(e, values.row._id)}
+            variant="contained"
+            color="error"
+          >
+            Delete{" "}
+          </Button>
+        </Box>
+      ),
+    },
   ];
   return (
     <>

@@ -24,6 +24,13 @@ const DashUsers = () => {
     { field: "_id", headerName: "User ID", width: 150, editable: true },
     { field: "email", headerName: "Email", width: 150 },
     {
+      field: "role",
+      headerName: "USer Status",
+      width: 150,
+      renderCell: (params) =>
+        params.row.role === 1 ? "Admin" : "Regular User",
+    },
+    {
       field: "createdAt",
       headerName: "Creation Date",
       width: 150,
@@ -91,7 +98,7 @@ const DashUsers = () => {
               pageSize={3}
               rowsPerPageOptions={[3]}
               checkboxSelection
-              slots={{toolbar:GridToolbar}}
+              slots={{ toolbar: GridToolbar }}
             />
           </Box>
         </Paper>

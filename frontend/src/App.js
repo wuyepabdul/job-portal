@@ -18,12 +18,15 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserInfoDashboard from "./pages/user/UserInfoDashboard";
 import SingleJob from "./pages/SingleJob";
 import DashUsers from "./pages/admin/DashUsers";
+import DashJobs from "./pages/admin/DashJobs";
 
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
 const AdminUserDashboardHOC = Layout(AdminDashboard);
 const UserInfoDashboardHOC = Layout(UserInfoDashboard);
 const DashUserDashboardHOC = Layout(DashUsers);
+const DashJobsDashboardHOC = Layout(DashJobs);
+
 const App = () => {
   return (
     <>
@@ -50,6 +53,15 @@ const App = () => {
                   <AdminRoute>
                     {" "}
                     <AdminUserDashboardHOC />
+                  </AdminRoute>
+                }
+              />
+              <Route
+                path="/admin/jobs"
+                element={
+                  <AdminRoute>
+                    {" "}
+                    <DashJobsDashboardHOC />
                   </AdminRoute>
                 }
               />

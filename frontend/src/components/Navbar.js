@@ -11,11 +11,14 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import WorkIcon from "@mui/icons-material/Work";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTheme } from "@mui/material";
 import { userLogoutAction } from "../redux/actions/userActions";
+import { themeModeAction } from "../redux/actions/themModeActions";
+import { DarkMode, LightMode } from "@mui/icons-material";
 
 const pages = ["Home"];
 
@@ -65,7 +68,7 @@ const Navbar = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <WorkIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -150,6 +153,18 @@ const Navbar = () => {
               </Button>
             ))}
           </Box>
+
+          {/*  toggle dark mode */}
+          <IconButton
+            sx={{ mr: 4 }}
+            onClick={() => dispatch(themeModeAction())}
+          >
+            {palette.mode === "dark" ? (
+              <DarkMode sx={{ color: "#ffffff", fontSize: "25px" }} />
+            ) : (
+              <LightMode sx={{ color: "#ffffff", fontSize: "25px" }} />
+            )}
+          </IconButton>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

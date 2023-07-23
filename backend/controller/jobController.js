@@ -97,6 +97,8 @@ exports.showJobsController = async (req, res) => {
       location: locationFilter,
     })
       .sort({ created: -1 })
+      .populate("user", "firstName lastName")
+      .populate("jobType", "jobTypeName")
       .skip(pageSize * (page - 1))
       .limit(pageSize);
 

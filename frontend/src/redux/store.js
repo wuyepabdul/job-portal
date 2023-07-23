@@ -30,6 +30,7 @@ let initialState = {
       ? JSON.parse(localStorage.getItem("userInfo"))
       : null,
   },
+  mode: "light",
 };
 const middleware = [thunk];
 

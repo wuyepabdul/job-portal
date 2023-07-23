@@ -10,6 +10,7 @@ import {
   userProfileReducer,
   userSigninReducer,
 } from "./reducers/userReducer";
+import { themeModeReducer } from "./reducers/themeModeReducers";
 
 const reducer = combineReducers({
   loadJobs: loadJobReducer,
@@ -20,6 +21,7 @@ const reducer = combineReducers({
   loadSingleJob: loadSingleJobReducer,
   userApplyJobs: userApplyJobsReducer,
   allUsers: allUsersReducer,
+  mode: themeModeReducer,
 });
 
 let initialState = {

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useMemo } from "react";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
@@ -20,6 +21,10 @@ import SingleJob from "./pages/SingleJob";
 import DashUsers from "./pages/admin/DashUsers";
 import DashJobs from "./pages/admin/DashJobs";
 
+import { createTheme } from "@mui/material";
+import { themeColors } from "./theme";
+import { UseSelector, useSelector } from "react-redux";
+
 const UserDashboardHOC = Layout(UserDashboard);
 const UserJobsHistoryHOC = Layout(UserJobsHistory);
 const AdminUserDashboardHOC = Layout(AdminDashboard);
@@ -28,6 +33,8 @@ const DashUserDashboardHOC = Layout(DashUsers);
 const DashJobsDashboardHOC = Layout(DashJobs);
 
 const App = () => {
+  const { mode } = useSelector((state) => state.mode);
+  const theme = useMemo(() => createTheme(themeColors(mode)), [mode]);
   return (
     <>
       <ToastContainer />
